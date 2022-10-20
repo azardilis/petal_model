@@ -33,7 +33,7 @@ import petal_model as p
 rules = p.mkRules(2, 1)
 ss = c.simulate(rules, p.init, nsteps=100) #run for 100 steps
 ss = m.simulate_until(rules, init,
-                      lambda s: sum([c.area for c in s.state]) > 100) #run until total size is less than 100
+                      lambda s: sum([c.area for c in s.state]) > 100) #run while total size is less than 100
 ```
 where in the `mkRules` function, the first argument is the ratio of the growth rates of the bottom vs the top fate and the second
 argument is the ratio of the division rates of the top vs the bottom fates.
