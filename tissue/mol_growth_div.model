@@ -1,0 +1,72 @@
+8		   # number of reactions, including growth and mechanical updates
+1 		   # number of division/removal rules
+0 		   # number of directions (with update rules)
+
+Diffusion2D 1 1 1
+0.5
+9
+
+Creation::FromList 1 2 1 1
+1
+9
+0
+
+Degradation::Two 1 2 1 1
+0.2
+9
+9
+
+
+GrowthForce::X 2 0
+0.01 0
+
+#VertexFromForce 3 1 2
+#0.02 0.0 0.0 # fX fY fZ
+#40 41
+
+WallGrowth::StressConcentrationHill
+7 2 2 0	   # 7 parameters, 2 types of variables
+# --- parameters
+0.005		   # k_growth, irreversible growth rate
+0.01          # k growth Hill 
+0.5		   # k Hill 
+5		   #n Hill a quel point c est stiff
+0.2		   # stress_threshold for when growth happens, cf Lockhart
+1		   # stretch_flag, 0 for stress (read from wall variable), 1 for strain
+0		   # linear_flag, 0 constant, 1 prop to wall length
+# --- indices
+0		   # wall length
+9		   # n° de la variable
+
+
+# ------------ mechanical rules ------------
+VertexFromWallSpring # Updates vertices from an asymmetric wall (edge) spring potential 
+2 1 1 		     # 2 parameters 1 type of variable and single variable
+# --- parameters
+0.15		     # k_force, spring constant
+1.0		     # frac_adhesion, additional strength for spring compression
+# --- indices
+0		     # wall length
+
+
+VertexNoUpdateFromIndexHoldX 0 1 2
+0 1
+
+Calculate::VertexVelocity 0 1 1
+8    # store index for velocity
+
+Division::ShortestPath2DConcentration
+7 2 1 1 
+# --- parameters
+1	# V_{threshold}
+1	# V1: extra volume added depending of the concentration 
+0.5	#kHill (not have to bz between 0 and 1)
+5	#nHill
+1.0	# L^{wall}_{frac}
+0.1	# L^{wall}_{threshold} (disallowed closeness)
+1	# centerCom flag(0:random, 1:COM)
+
+# --- indices
+3
+
+9
