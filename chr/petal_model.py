@@ -284,5 +284,5 @@ def go_n(rules: List[Rule],
 
 def to_meshes(ss):
     for i, s in enumerate(ss):
-        m = p.mkCells(p.orderCells(s.state))
+        m = mkCells(orderCells(s.state))
         m.save(f"petal_cells{i}.vtk")
