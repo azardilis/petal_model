@@ -38,3 +38,9 @@ ss = m.simulate_until(rules, init,
 where in the `mkRules` function, the first argument is the ratio of the growth rates of the bottom vs the top fate and the second
 argument is the ratio of the division rates of the top vs the bottom fates.
 
+
+To see the results you can access the state in `ss` directly or output them to vtk files for viewing in Paraview:
+```
+p.to_meshes(ss)
+```
+that will write the state per timepoint to vtk files.
